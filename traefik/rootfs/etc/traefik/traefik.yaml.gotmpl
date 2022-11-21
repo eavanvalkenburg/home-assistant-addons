@@ -12,6 +12,14 @@ entryPoints:
     address: ":80"
   web-secure:
     address: ":443"
+{{- if has $options "tls_config" }}
+    http:
+      tls:
+        options: "default"
+        domains: 
+          - main: {{ $options.domain_main }}
+            sans: {{ $options.domain_sans }}            
+{{- end }}
 {{- if has $options "forwarded_headers_insecure" }}
     forwardedHeaders:
       insecure: {{ $options.forwarded_headers_insecure }}
@@ -50,6 +58,7 @@ certificatesResolvers:
 providers:
   file:
     directory: "{{ $options.dynamic_configuration_path }}"
+    watch: true
 
 {{ if and (has $options "access_logs") $options.access_logs -}}
 accessLog: {}
