@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.3.0
+
+* Updated Traefik to 2.9.5
+* Added support for tls and file watch
+
 ## 4.2.0
 
 * 🐞 Remove pilot support _(Breaking change)_
