@@ -33,9 +33,10 @@ options:
   log_level: info
   access_logs: false
   forwarded_headers_insecure: false
-  tls_config: false
-  domain_main: ''
-  domain_sans: []
+  tls_config:
+    enabled: false
+    domain_main: ''
+    domain_sans: []
   dynamic_configuration_path: "/config/traefik/"
   letsencrypt:
     enabled: false
@@ -56,8 +57,9 @@ schema:
       - str?
   env_vars:
     - str
-  tls_config: bool
-  domain_main: str
-  domain_sans:
-    - str
+  tls_config:
+    enabled: bool
+    domain_main: str
+    domain_sans:
+      - str
 

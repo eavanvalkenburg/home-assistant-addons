@@ -12,13 +12,16 @@ entryPoints:
     address: ":80"
   web-secure:
     address: ":443"
-{{- if has $options "tls_config" }}
+{{- if and (has $options "tls_config") ($options.tls_config.enabled) }}
     http:
       tls:
         options: "default"
         domains: 
-          - main: {{ $options.domain_main }}
-            sans: {{ $options.domain_sans }}            
+          - main: {{ $options.tls_config.domain_main }}
+            sans: 
+            {{- range $options.tls_config.domain_sans }}
+              - "{{ . }}"
+            {{- end }}      
 {{- end }}
 {{- if has $options "forwarded_headers_insecure" }}
     forwardedHeaders:
